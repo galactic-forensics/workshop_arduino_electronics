@@ -29,7 +29,7 @@ All figures are located
 in the `graphics` folder.
 If python scripts or `svg` originals exist,
 the filenames will be identical
-to the files in the figures folder.
+to the files in the figures' folder.
 
 
 ## Image credit and copyrights
