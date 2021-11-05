@@ -4,7 +4,9 @@
 
 Like programming tutorials start with a ``Hello World!'' program, electronics tutorials generally start with a blink example. In this example you will learn to use digital \ac{io} pins to drive an \ac{led}. 
 
-\section{Internal \ac{led}}
+\section{\acp{led}}
+
+\subsection{Internal \ac{led}}
 
 Arduinos that have a built-in \ac{led} allow the user to program and use this \ac{led}. Therefore, all the hardware you need is the Arduino and a USB cable in order to connect it to your computer. Feel free to plug the Arduino into a breadboard as shown in Figure~\ref{fig:blink:arduino_alone}.
 \begin{figure}[htb]
@@ -19,7 +21,7 @@ If you start the \ac{ide} and load the basic example ``Blink'', you will get som
 
 \exerbox{Open the example blink file and read the comments. What is done in the setup? What does the variable \lstinline{LED_BUILTIN} stand for? Study the loop, what will happen when you upload the code to your Arduino? Do so and see if your assumptions were correct. Modify the timings of the program such that the \ac{led} blinks at a different rate.}
 
-\section{External \acs{led}}
+\subsection{External \acs{led}}
 
 We can also connect an external \ac{led} to a digitial \ac{io} pin. To use a pin as an output pin, i.e., to set its level by software, we have to define the \lstinline{pinMode} to be in \lstinline{OUTPUT} mode. Furthermore, connecting an \ac{led} to a pin and simply driving it can be bad for certain electronics, since an \ac{led} by itself has no resistance. Looking at equation~\eqref{eqn:uri} we can see that in such a case the current should become infinity, which might destroy the \ac{io} pin. Fortunately, Arduinos have an internal resistance that prevent this from happening. Furthermore, we are using \acp{led} that have an internal resistor in addition in order to protect the \ac{led} from blowing up.
 
@@ -31,11 +33,50 @@ We can also connect an external \ac{led} to a digitial \ac{io} pin. To use a pin
 \end{figure}
 \exerbox{Draw a wiring diagram to connect your own \ac{led} to a Arduino output pin. Where do the anode and cathode of the \ac{led} connect to? Attach your \ac{led} to the arduino and modify the simple blink experiment to use your \ac{led} instead of the built-in one. If you have trouble figuring out how to connect the \ac{led}, study Figure~\ref{fig:blink:arduino_led} and remember that every electric circiut must be completed.}
 
-\section{Dimming an \ac{led}}
+\subsection{Dimming an \ac{led}}
 
-As we have discussed above, \acp{led} cannot be dimmed. However, we can use a \ac{pwm} output in order to only have the \ac{led} on for a certain amount of time. This will result in our brain perceiving the \ac{led} as dimmed. We have already described the \ac{pwm} outputs above in Section~\ref{sec:intro:dac}, see also Figure~\ref{fig:intro:pwm}. In order to identify a \ac{pwm} output, look at the pinout (Appendix~\ref{app:pinout}). Digital pins indicated with $\sim$ are the ones that can be used in this fashion, e.g., pin 3.
+As we have discussed above, \acp{led} cannot be dimmed in the traditional way, i.e., by using a potentiometer to lower the voltage. However, we can use a \ac{pwm} output in order to only have the \ac{led} on for a certain amount of time. This will result in our brain perceiving the \ac{led} as dimmed. We have already described the \ac{pwm} outputs above in Section~\ref{sec:intro:dac}, see also Figure~\ref{fig:intro:pwm}. In order to identify a \ac{pwm} output, look at the pinout (Appendix~\ref{app:pinout}). Digital pins indicated with $\sim$ are the ones that can be used in this fashion, e.g., pin 3.
 
-% \exerbox{Connect your \ac{LED} to a \ac{pwm} output pin. From the Arduino \ac{ide}, load the basic example named ``Fade''.
-% \begin{enumerate}
-    % \item Read the setup and the loop. How is the 
-% \end{enumerate}}
+\exerbox{Connect your \ac{led} to a \ac{pwm} output pin. From the Arduino \ac{ide}, load the basic example named ``Fade''.
+\begin{enumerate}
+    \item Read the setup and loop functions. How is the pin output set and what is the difference to the way it was set in the previous exercise?
+    \item Modify the fade amount to 7 and run it again. At the brigthest pint, the \ac{led} briefly blinks. Why?
+    \item Can you rewrite the routine in order to prevent it from blinking at the highest point? An \href{https://www.arduino.cc/reference/en/language/structure/control-structure/if/}{\lstinline{if} statement} might be useful.
+\end{enumerate}}
+
+The \lstinline{void loop()} function acts as a endless loop. The most commonly used looping structures are \href{https://www.arduino.cc/reference/en/language/structure/control-structure/while/}{\lstinline{while}} and \href{https://www.arduino.cc/reference/en/language/structure/control-structure/for/}{\lstinline{for}} loops. In this sence, the loop function is no different from a \lstinline{while(True)} loop.
+
+\exerbox{Inside the \lstinline{void loop()} function, write a \lstinline{for} loop to replace the ramp. Ensure that your loop does not blink, even if you select various fade amounts.}
+
+\qbox{
+    \begin{itemize}
+        \item How does integer division in \cpp\ work?
+        \item Ho wcan you do a division in \cpp\ and round the result to the nearest integer?
+        \item What is boolean variable and how do you compare them, e.g., in an \lstinline{if} statement?
+        \item How would you switch the state of a boolean variable?
+    \end{itemize}
+}
+
+\subsection{Multiple \acp{led}}
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{graphics/01_blink/arduino_two_leds.jpg}
+    \caption{An Arduino with two \acp{led} connected.}
+    \label{fig:blink:arduino_two_leds}
+\end{figure}
+Finally, since you have more than one pin available, multiple \acp{led} can be set up. An example of a test setup is shown in Figure~\ref{fig:blink:arduino_two_leds} This can be especially useful if you want to display the status of your setup using different colored \acp{led}.
+
+\paragraph{Subfunctions in \cpp} Sometimes it is useful to put somem of your code into external functions, i.e., not to write them into the main loop. For example, you can write a function as following:
+
+\begin{lstlisting}
+void myFunction(bool toggle) {
+    // your code here...
+}
+\end{lstlisting}
+You can then call this function from the main loop by calling \lstinline{myFunction(true);} if you want to assign the value \lstinline{true} to the variable \lstinline{toggle}.
+
+\exerbox{Setup two \acp{led}, a red and a green one. Write a program that switches between blinking the red and green \acp{led}. Write a subroutine that takes a boolean variable as an input and, depending on the value of this input variable, turns either the red or the green \ac{led} on (and the other one off).}
+
+\section{Buttons}
+

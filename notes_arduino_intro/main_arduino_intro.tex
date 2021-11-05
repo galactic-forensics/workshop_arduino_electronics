@@ -18,7 +18,7 @@
 
 % colors
 \usepackage{color,colortbl}
-\usepackage[dvipsnames]{xcolor}
+\usepackage[dvipsnames,x11names,svgnames]{xcolor}
 \definecolor{darkblue}{HTML}{00354C}
 
 \usepackage{booktabs}
@@ -109,6 +109,7 @@
 
 \providecommand{\qbox}[1]{\awesomebox[RoyalPurple]{2pt}{\faQuestion}{RoyalPurple}{\boxtitle{\question} #1}}
 
+\newcommand{\cpp}{C\nolinebreak\hspace{-.05em}\raisebox{.4ex}{\tiny\textbf +}\nolinebreak\hspace{-.10em}\raisebox{.4ex}{\tiny\textbf +}}
 
 %======================================================
 %title specifications
@@ -136,6 +137,7 @@
 	commentstyle=\color{ForestGreen}\ttfamily,
 	keywordstyle=\color{NavyBlue}\bfseries,
 	frameround=tttt,
+	backgroundcolor=\color{AliceBlue},
 	morekeywords={
 		pinMode, 
 		digitalWrite, 

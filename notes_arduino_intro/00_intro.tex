@@ -4,13 +4,13 @@
 
 Scientific research that focuses on experiments and measurements has rapidly grown in the recent past, mainly thanks to significant improvements in engineering, instrument availability, and computing power. While many companies provide state-of-the-art research instrumentation and setups, cutting-edge scientific discovery often still thrives from home-built setups. 
 
-In addition to scientific instrument developement and availability, the consumer / hobby marked has seen a huge increase in home-made electronics.\footnote{For example, have a look at \href{https://www.nytimes.com/2021/10/10/health/coronavirus-ventilation-carbon-dioxide.html}{this} article in the New York Times. Looking at the images clearly shows a 3D printed case as well as a standard Arduino cloud interface.} This development has especially been facilitated by products such as \href{https://www.arduino.cc/}{Arduinos} and \href{https://www.raspberrypi.org/}{Raspberry Pis}, as well as the huge maker community. Automation of research experiments can often benefit from such existing, low-cost products in order to significantly enhance an experiment or measurement. Furthermore, full low-cost instruments enabling frugal research have also been developed based on such platforms, see, e.g., the \href{https://squid-imaging.org/}{\ac{squid} project}.
+In addition to scientific instrument development and availability, the consumer / hobby marked has seen a huge increase in home-made electronics.\footnote{For example, have a look at \href{https://www.nytimes.com/2021/10/10/health/coronavirus-ventilation-carbon-dioxide.html}{this} article in the New York Times. Looking at the images clearly shows a 3D printed case as well as a standard Arduino cloud interface.} This development has especially been facilitated by products such as \href{https://www.arduino.cc/}{Arduinos} and \href{https://www.raspberrypi.org/}{Raspberry Pis}, as well as the huge maker community. Automation of research experiments can often benefit from such existing, low-cost products in order to significantly enhance an experiment or measurement. Furthermore, full low-cost instruments enabling frugal research have also been developed based on such platforms, see, e.g., the \href{https://squid-imaging.org/}{\ac{squid} project}.
 
 \section{Basic Physics to Remember}
 
-Building electroncis is not just fun because you can hold your final product in your hand and play with it, but also since it is a direct application of basic physics. Remember your introductory classes in physics! 
+Building electronics is not just fun because you can hold your final product in your hand and play with it, but also since it is a direct application of basic physics. Remember your introductory classes in physics! 
 
-\paragraph{\href{https://en.wikipedia.org/wiki/Ohm's_law}{Ohm's law}} Throughout this workshop, you will encounter Ohm's law very frequently. This law states the current $I$ through a conductor with resisitvity $R$ is directly proportional to the voltage $U$ across the conductor. We can write this as:
+\paragraph{\href{https://en.wikipedia.org/wiki/Ohm's_law}{Ohm's law}} Throughout this workshop, you will encounter Ohm's law very frequently. This law states the current $I$ through a conductor with resistivity $R$ is directly proportional to the voltage $U$ across the conductor. We can write this as:
 \begin{align}
     I &= \frac{U}{R}\\
     U &= RI \label{eqn:uri}
@@ -19,7 +19,7 @@ This basic relationship will become really important when designing circuits.
 
 \morebox{Maximum current}{Arduino pins, as we will discover later, can supply 5\,V to, e.g., an \ac{led}. Since an \ac{led} is a diode, it's resistance (if connected properly) is close to zero (see also \href{https://en.wikipedia.org/wiki/Light-emitting_diode}{Wikipedia}). Therefore, applying a 5\,V voltage would result in an infinite current across this component. How would you add a resistor to limit the potential current to a maximum of 10\,mA?}
 
-\paragraph{\href{https://en.wikipedia.org/wiki/Electric_power}{Electric power}} If a current flows through a resistor, electrical energy is transfered. The energy per time that is used in this resistor is the electric power $P$, which can be calculated as
+\paragraph{\href{https://en.wikipedia.org/wiki/Electric_power}{Electric power}} If a current flows through a resistor, electrical energy is transferred. The energy per time that is used in this resistor is the electric power $P$, which can be calculated as
 \begin{equation}
     P = U I.
 \end{equation}
@@ -30,10 +30,10 @@ Often, this electrical power is dissipated as heat. For example, an \href{https:
 
 \section{Analog and Digital}
 
-If you turn on a radio and it is too loud, you can use the volume know, which is nothing else than an adjustable potetiometer, in order to regulate the volume of the sound. This volume can be adjusted over a whole range of settings. The potentiometer adopts linearly depending on its position, giving you an analog control over the volume. Mapping the volume from 0 (quiet) to 1 (loud), you can reach any value in between. Digital signals on the other hand are either on or off. Arduinos generally have many digital \ac{io} pins which can be either high (5\,V) or low (grounded). If you connect a 3.3 V battery to an inpu pin, of course via a resistor in order to not exceed the current maximum, the switch would either tell you that it is high or low, depending on the threshold that are actually set in order to determine this. Any kind of microprocessor \textit{only} understands digital signals. 
+If you turn on a radio, and it is too loud, you can use the volume know, which is nothing else than an adjustable potentiometer, in order to regulate the volume of the sound. This volume can be adjusted over a whole range of settings. The potentiometer adopts linearly depending on its position, giving you an analog control over the volume. Mapping the volume from 0 (quiet) to 1 (loud), you can reach any value in between. Digital signals on the other hand are either on or off. Arduinos generally have many digital \ac{io} pins which can be either high (5\,V) or low (grounded). If you connect a 3.3 V battery to an input pin, of course via a resistor in order to not exceed the current maximum, the switch would either tell you that it is high or low, depending on the threshold that are actually set in order to determine this. Any kind of microprocessor \textit{only} understands digital signals. 
 
 \subsection{Analog-to-Digital Conversion}
-In order to measure as signal from a sensor, e.g., a photo detector or a temperature sensor as we will use later, a device called \ac{adc} can be used. Above we mentioned that any kind of microprocessor only understands digital signals. The same is also true for an \ac{adc}. While a digital \ac{io} pin has two levels (high / on or low / off), an \ac{adc} generally has many more levels in between. The resolution of an \ac{adc} is generally expressed in bits.
+In order to measure as signal from a sensor, e.g., a photodetector or a temperature sensor as we will use later, a device called \ac{adc} can be used. Above we mentioned that any kind of microprocessor only understands digital signals. The same is also true for an \ac{adc}. While a digital \ac{io} pin has two levels (high / on or low / off), an \ac{adc} generally has many more levels in between. The resolution of an \ac{adc} is generally expressed in bits.
 
 \infobox{Bit}{For any microprocessor, the two possible states (high and low) are generally expressed as 1 and 0. Binary numbers (base 2) are therefore the ideal representation to express different states. A digital \ac{io} pin has 1\,bit resolution, which means it can either be 1 or 0. Higher resolution means that more bits are available to set states. For two bits, i.e., a binary number with with two digits, the possible states are 00, 01, 10, 11. This means that 2\,bit resolution has a total of four steps. For $n$\,bits, the number of available steps are $2^n$.}
 
@@ -63,23 +63,23 @@ Of course, we sometimes require the opposite of an \ac{adc} and need to convert 
     \caption{\Ac{pwm} cycles and average voltage for two different duty cycles.}
     \label{fig:intro:pwm}
 \end{figure}
-Figure~\ref{fig:intro:pwm} shows a schematic on how this process works with a 5\,V pin. The digital pin is rapidly turned on and off. If it is at 5\,V for 50\% of the time, a 50\% duty cycle, the effective, smoothed-out voltage that can be seen by a ``slow'' component would be 2.5\,V. Depending on the duty cycle, a pseudo-analog output can therefore be created. A great example to use \ac{pwm} is to have a dimmable \ac{led}. \acp{led} generally have only two states, on and off, i.e., is the voltage is high enough to light them, they are bright and otherwise dark. Using \ac{pwm} however, we can turn an \ac{led} on an off in rapid succession such that it looks to the human eye as if the light source itself was dimmed.
+Figure~\ref{fig:intro:pwm} shows a schematic on how this process works with a 5\,V pin. The digital pin is rapidly turned on and off. If it is at 5\,V for 50\% of the time, a 50\% duty cycle, the effective, smoothed-out voltage that can be seen by a ``slow'' component would be 2.5\,V. Depending on the duty cycle, a pseudo-analog output can therefore be created. A great example to use \ac{pwm} is to have a dimmable \ac{led}. \acp{led} generally have only two states, on and off, i.e., is the voltage is high enough to light them, they are bright and otherwise dark. Using \ac{pwm} however, we can turn an \ac{led} on and off in rapid succession such that it looks to the human eye as if the light source itself was dimmed.
 
 \morebox{Analog output with \ac{pwm}}{Can you come up with a way to create a smooth analog output from a \ac{pwm} pin? Think about how your cellphone charger turns \ac{ac} into \ac{dc}.}
 
 \section{Arduino}
 
-For this class, we will be using an Arduino Micro. You can find more information and various alternative arduino boards for all kinds of projects on the \href{https://www.arduino.cc}{Arduino website}.
+For this class, we will be using an Arduino Micro. You can find more information and various alternative Arduino boards for all kinds of projects on the \href{https://www.arduino.cc}{Arduino website}.
 
 In Appendix~\ref{app:pinout}, a schematic of the Arduino Micro board is given. This so-called pinout diagram specifies what all the various pins on the board mean and what they are used for. It is a very handy reference for when you develop your project.
 
 \subsection{Programming an Arduino}
 
-The easiest way to program an Arduino is by using the \ac{ide} for Arduino that can be found \href{LINKLINKLINK}{here} \textcolor{red}{LINK}. The website also has installation guides on how to install the IDE and Arduino driver on your computer, depending on your operating system. Please see this documentation or look at it at least briefly, since it will help you with trouble shooting in case your computer does not find the Arduino board.
+The easiest way to program an Arduino is by using the \ac{ide} for Arduino that can be found \href{https://www.arduino.cc/en/software}{here}. The website also has installation guides on how to install the IDE and Arduino driver on your computer, depending on your operating system. Please see this documentation or look at it at least briefly, since it will help you with troubleshooting in case your computer does not find the Arduino board.
 
 \paragraph{The Arduino \ac{ide}} is very useful when you are starting to learn how to program your Arduino. Under ``File'', ``Examples'' you can find eleven categories that give you many well-explained example snippets of code for various applications. We will make a lot of use of these examples, especially during the first few chapters of this workshop. The \ac{ide} also allows you to verify your code, i.e., check if it contains any errors (check button in the toolbar) and to upload your code to the Arduino itself (right arrow button in the toolbar). In order to upload your code to the Arduino board, make sure that you have the correct board selected. Go to ``Tools'', ``Board'' to select ``Arduino Micro''. Furthermore, you need to select the port on which your board is connected to the computer. To do so, go to ``Tools'', ``Port'' to select the correct one. Now you are ready to begin uploading example code or your own code.
 
-\paragraph{Programming language overview} To program your Arduino, the code must be written in C++. There are many great introductions online that can help you to get started \textcolor{red}{EXAMPLE LINKS}. Therefore, we will only discuss very briefly the most important basics here. These will help you to avoid the most common mistakes.
+\paragraph{Programming language overview} To program your Arduino, the code must be written in \cpp. There are many great introductions online that can help you to get started, see also the background information box below. Therefore, we will only discuss very briefly the most important basics here. These will help you to avoid the most common mistakes.
 
 \begin{itemize}
     \item Variables must be declared. If you need an integer for example and assign it the value three, you can do this by declaring the variable as \lstinline{int myVar = 3;}
@@ -88,35 +88,33 @@ The easiest way to program an Arduino is by using the \ac{ide} for Arduino that 
     \item It is up to the user to make the code look readable. If you want, you can write everything into one line since line endings and function endings are defined by the above stated rules.
     \item Line comments are preceeded with \lstinline{//} while block comments use the following structure:
     \begin{lstlisting}
-    /*
-        My comments
-        in a block...
-    */
+/*
+    My comments in a block...
+*/
     \end{lstlisting}
 \end{itemize}
 
 In general, the minimum file structure for your Arduino code should look similar to the following.
-\begin{lstlisting}[frame=single]
+\begin{lstlisting}
 // variable declarations, load libraries
 
 void setup() {
   // setup code
-
 }
 
 void loop() {
   // main code that repeats
-
 }
 \end{lstlisting}
-On the very top of your code, put variable declarations and initializations if required and load the necessary libraries. The \lstinline{setup} function is the part that runs once when you reset or boot up your Arduino. The \lstinline{loop} function will then run repeatedly and, ideally, until you unplug or reset the Arduino. We will see later how to fill these standard functions. In addition, you can of course write your own functions with any names of your choosing, just make sure they do not collide in naming with these default functions. 
+On the very top of your code, put variable declaration and initialization if required and load the necessary libraries. The \lstinline{setup} function is the part that runs once when you reset or boot up your Arduino. The \lstinline{loop} function will then run repeatedly and, ideally, until you unplug or reset the Arduino. We will see later how to fill these standard functions. In addition, you can of course write your own functions with any names of your choosing, just make sure they do not collide in naming with these default functions. 
 
-\infobox{Help with programming your Arduino}{To find further information on how to code an Arduino and get yourself started with C++, see the following links \textcolor{red}{ADD LINKS}:
+\infobox{Help with programming your Arduino}{To find further information on how to code an Arduino and get yourself started with \cpp, see the following linksx:
 \begin{itemize}
-    \item \href{}{Starters guide for programming for Arduino}
-    \item \href{}{Reference guide specifically for Arduino}
-    \item \href{}{Libraries in Arduino}
-    \item \href{}{\dots}
+    \item \href{https://www.als.lib.wi.us/site/wp-content/uploads/2018/05/arduino-starter-kit-manual.pdf}{Starters guide for programming for Arduino}
+    \item \href{https://www.arduino.cc/reference/en/}{Programming reference specifically for Arduino}
+    \item \href{https://www.arduino.cc/reference/en/libraries/}{Libraries in Arduino}
+    \item \href{https://www.arduino.cc/glossary/en/}{Glossary of commonly used terms}
+    \item \href{https://forum.arduino.cc/}{User forum}
 \end{itemize}
 Note that many components that we use come with detailed instructions and guides. For example, if you buy components from \href{https://adafru.it}{Adafruit}, these parts generally come with a guide for Arduino, etc.}
 
