@@ -8,6 +8,10 @@ code examples,
 and any original figures and raw data
 the workshop.
 
+A direct link to the notes
+in PDF can be found
+[here](https://raw.githubusercontent.com/galactic-forensics/workshop_arduino_electronics/main/notes_arduino_intro/main_arduino_intro.pdf).
+
 ## Figures
 
 Figures are given
