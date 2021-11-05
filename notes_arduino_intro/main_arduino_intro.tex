@@ -76,8 +76,7 @@
 }
 \include{acronyms}
 
-% newcommands
-%============
+%======================================================
 % my short cuts
 \providecommand{\e}[1]{\ensuremath{\times 10^{#1}}}
 \providecommand{\ex}[1]{\ensuremath{^{#1}}}
@@ -90,13 +89,25 @@
 \newcommand{\tr}{$^\tn{\textregistered}$}
 
 % more box stuff
-\makeatletter
 \providecommand{\boxtitle}[1]{\sffamily{\textbf{#1}}\normalfont}
 	
 \providecommand{\infobox}[2]{\awesomebox[MidnightBlue]{2pt}{\faPaw}{MidnightBlue}{\boxtitle{#1} #2}}
 \providecommand{\morebox}[2]{\awesomebox[BrickRed]{2pt}{\faRocket}{BrickRed}{\boxtitle{#1} #2}}
-\providecommand{\codebox}[2]{\awesomebox[OliveGreen]{2pt}{\faCode}{OliveGreen}{\boxtitle{#1} #2}}
 
+
+%======================================================
+% My exercise and question environment
+\newcounter{exercisecounter}
+\setcounter{exercisecounter}{0}
+\newcommand{\exer}{Exercise~\theexercisecounter\refstepcounter{exercisecounter}}
+
+\providecommand{\exerbox}[1]{\awesomebox[OliveGreen]{2pt}{\faCode}{OliveGreen}{\boxtitle{\exer} #1}}
+
+\newcounter{questioncounter}
+\setcounter{questioncounter}{0}
+\newcommand{\question}{Question~\thequestioncounter\refstepcounter{questioncounter}}
+
+\providecommand{\qbox}[1]{\awesomebox[RoyalPurple]{2pt}{\faQuestion}{RoyalPurple}{\boxtitle{\question} #1}}
 
 
 %======================================================
@@ -107,13 +118,6 @@
 \date{Fall semester 2021}
 
 %======================================================
-% UPDATES %
-%======================================================
-% exoplanets
-\newcommand{\ExoplanetsNumber}{4352}  % confirmed
-\newcommand{\ExoplanetDate}{February 26, 2021}
-
-%======================================================
 
 
 
@@ -121,8 +125,24 @@
 %-------------------DOCUMENT---------------------------
 
 \usepackage{blindtext}
+\usepackage{listings}
 
 \begin{document}
+
+\lstset{
+	language=C++,
+	basicstyle=\ttfamily,
+	stringstyle=\ttfamily,
+	commentstyle=\color{ForestGreen}\ttfamily,
+	keywordstyle=\color{NavyBlue}\bfseries,
+	frameround=tttt,
+	morekeywords={
+		pinMode, 
+		digitalWrite, 
+		delay,
+		analogWrite
+	}
+}
 
 \maketitle
 % TOC
@@ -133,6 +153,9 @@
 \clearpage
 
 
+% Chapter numbers
+\setcounter{chapter}{-1}
+
 % MAIN TEXT
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -142,26 +165,33 @@
 
 The notes are structured into 6 chapters. The first chapter mainly describes basics that students should already know from their introduction to Physics classes. It will be briefly reviewed in the first session. Subsequently, we will discuss one chapter per workshop session. The notes are prepared as we go, and you can always find the latest version, but also solutions to the examples in the form of code examples, on \href{https://github.com/galactic-forensics/workshop_arduino_electronics}{GitHub}. If you find typos, errors, or other issues please let me know. The most recent copy of the \LaTeX\ files and figures can also be found on 
 
-The lecture notes contain clickable links, e.g., all acronyms are linked to the acronyms' definition page. These links are generally colored in \textcolor{darkblue}{dark blue}.
-Many links to topics are also provided in the footnotes, so keep an eye out for those.
-Specific boxes throughout the text discuss further information. They are defined as following:
+The lecture notes contain clickable links in \textcolor{darkblue}{dark blue}.
+Furthermore, boxes throughout the text discuss are used for the following contents:
 
 \infobox{Background information}{on topics that do not necessarily fit into the text but are important to keep in mind will be given in a box like this.}
 
-\morebox{Further information and reading}{for the avid reader will be pointed out in a box like this. The scope of these boxes is generally slightly outside the realm of the class.}
+\morebox{Think about it more!}{These boxes will challenge you to think a problem through for yourself and go into more detail.}
 
-\codebox{Programming background information}{is given in a box like this. Code snippets and examples will be given throughout the text. The boxes will point you to more resources.}
+\exerbox{Exercises are given in these boxes. Flex your coding muscles and practize what you've learned.}
+\setcounter{exercisecounter}{0}
+
+\qbox{Questions will be given in these boxes. They should solidify your background knowledge.}
+\setcounter{questioncounter}{0}
 
 This workshop was first designed for interested students at the \href{https://www.brandeis.edu/mrsec/}{\ac{mrsec}} at Brandeis University in fall 2021. Support is provided by the Brandeis NSF MRSEC, DMR-2011486.
 
-\vspace{0.5cm} \centering
-\href{https://www.brandeis.edu/mrsec/}{\includegraphics[height=2cm]{graphics/nsf_mrsec_logo.png}}
+\begin{center}
+	\vspace{0.5cm} 
+	\href{https://www.brandeis.edu/mrsec/}{\includegraphics[height=2cm]{graphics/nsf_mrsec_logo.png}}
+\end{center}
 
 
 \printacronyms
 
 
 % Chapters
+\include{00_intro}
+\include{01_blink}
 
 
 % Bibliography
@@ -180,6 +210,6 @@ This workshop was first designed for interested students at the \href{https://ww
 \appendixpage
 \clearpage
 
-% \include{appendix}
+\include{appendix}
 
 \end{document}

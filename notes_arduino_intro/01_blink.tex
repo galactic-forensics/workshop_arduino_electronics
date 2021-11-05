@@ -1,0 +1,41 @@
+%!TEX root = main_arduino_intro.tex
+
+\chapter{Blink}
+
+Like programming tutorials start with a ``Hello World!'' program, electronics tutorials generally start with a blink example. In this example you will learn to use digital \ac{io} pins to drive an \ac{led}. 
+
+\section{Internal \ac{led}}
+
+Arduinos that have a built-in \ac{led} allow the user to program and use this \ac{led}. Therefore, all the hardware you need is the Arduino and a USB cable in order to connect it to your computer. Feel free to plug the Arduino into a breadboard as shown in Figure~\ref{fig:blink:arduino_alone}.
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{graphics/01_blink/arduino_alone.jpg}
+    \caption{Arduino micro plugged into a breadboard. On the left the USB connection is visible. On the right of the label where it says ``Arduino'', the internal LED can be seen.}
+    \label{fig:blink:arduino_alone}
+\end{figure}
+The internal \ac{led} in Figure~\ref{fig:blink:arduino_alone} can be seen just on the right side of the label that says ``Arduino''. In addition, you can see a button on the right hand side of the board (the reset button) as well as two more \acp{led} on the left side of this button. These additional \acp{led} cannot be accessed by the user and are reserved for the system.
+
+If you start the \ac{ide} and load the basic example ``Blink'', you will get some code that will control the \ac{led}. The following exercises will use this simple example and slowly extend it.
+
+\exerbox{Open the example blink file and read the comments. What is done in the setup? What does the variable \lstinline{LED_BUILTIN} stand for? Study the loop, what will happen when you upload the code to your Arduino? Do so and see if your assumptions were correct. Modify the timings of the program such that the \ac{led} blinks at a different rate.}
+
+\section{External \acs{led}}
+
+We can also connect an external \ac{led} to a digitial \ac{io} pin. To use a pin as an output pin, i.e., to set its level by software, we have to define the \lstinline{pinMode} to be in \lstinline{OUTPUT} mode. Furthermore, connecting an \ac{led} to a pin and simply driving it can be bad for certain electronics, since an \ac{led} by itself has no resistance. Looking at equation~\eqref{eqn:uri} we can see that in such a case the current should become infinity, which might destroy the \ac{io} pin. Fortunately, Arduinos have an internal resistance that prevent this from happening. Furthermore, we are using \acp{led} that have an internal resistor in addition in order to protect the \ac{led} from blowing up.
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{graphics/01_blink/arduino_led.jpg}
+    \caption{Arduino with one \ac{led} connected.}
+    \label{fig:blink:arduino_led}
+\end{figure}
+\exerbox{Draw a wiring diagram to connect your own \ac{led} to a Arduino output pin. Where do the anode and cathode of the \ac{led} connect to? Attach your \ac{led} to the arduino and modify the simple blink experiment to use your \ac{led} instead of the built-in one. If you have trouble figuring out how to connect the \ac{led}, study Figure~\ref{fig:blink:arduino_led} and remember that every electric circiut must be completed.}
+
+\section{Dimming an \ac{led}}
+
+As we have discussed above, \acp{led} cannot be dimmed. However, we can use a \ac{pwm} output in order to only have the \ac{led} on for a certain amount of time. This will result in our brain perceiving the \ac{led} as dimmed. We have already described the \ac{pwm} outputs above in Section~\ref{sec:intro:dac}, see also Figure~\ref{fig:intro:pwm}. In order to identify a \ac{pwm} output, look at the pinout (Appendix~\ref{app:pinout}). Digital pins indicated with $\sim$ are the ones that can be used in this fashion, e.g., pin 3.
+
+% \exerbox{Connect your \ac{LED} to a \ac{pwm} output pin. From the Arduino \ac{ide}, load the basic example named ``Fade''.
+% \begin{enumerate}
+    % \item Read the setup and the loop. How is the 
+% \end{enumerate}}
