@@ -109,6 +109,13 @@ void loop() {
 \end{lstlisting}
 On the very top of your code, put variable declaration and initialization if required and load the necessary libraries. The \lstinline{setup} function is the part that runs once when you boot up your Arduino. The \lstinline{loop} function will then run repeatedly and, ideally, until you unplug or reset the Arduino. We will see later how to fill these standard functions. In addition, you can of course write your own functions with any names of your choosing, just make sure they do not collide in naming with these default functions. 
 
+\paragraph{Debugging} When code does not do the thing we expect it to, it is often difficult to exactly see why it does not work. While the Arduino \ac{ide} catches many bugs, it cannot catch logic errors. If you simply code a script on your computer, you might debug it by printing out values to the screen. The same can be done with the Arduino. Unless you have a screen connected to the Arduino, you have to send the values to print via the serial connection to your computer for displaying. The statement \lstinline{Serial.begin(9600);} should go into your setup routine. This begins the serial communication to your computer with a \href{https://en.wikipedia.org/wiki/Baud}{baud rate} of 9600. Inside your main loop, you can then use the following print statements to write to your computer:
+\begin{itemize}
+    \item \lstinline{Serial.print("Hello ");} prints "Hello " without a line break.
+    \item \lstinline{Serial.println("World!");} prints "World!" on the same line as the print before and then starts a new line.
+\end{itemize}
+To see these printed values, click in the Arduino \ac{ide} on ``Tools'' and then select ``Serial Monitor''. Note that you can also send commands from the computer to the Arduino via Serial. More information can be found \href{https://www.arduino.cc/reference/en/language/functions/communication/serial/}{here}.
+
 \infobox{Help with programming your Arduino}{To find further information on how to program for Arduino and get yourself started with \cpp, see the following links:
 \begin{itemize}
     \item \href{https://www.als.lib.wi.us/site/wp-content/uploads/2018/05/arduino-starter-kit-manual.pdf}{Starters guide for programming for Arduino}
