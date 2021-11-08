@@ -20,3 +20,5 @@ The following exercises only have minor modifications.
 The Arduino examples are directly used.
 
 - Exercise 0
+- Exercise 6 (Soldering only, no code)
+- Exercise 7
