@@ -10,3 +10,4 @@ They are sorted by filename.
 | 7seg_photo.jpg         | Peter Halasz via Wikipedia     | https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:Seven_segment_01_Pengo.jpg | [CC By-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | No |
 | 7seg_schematic.png     | Uln2003 via Wikipedia  | https://en.wikipedia.org/wiki/Seven-segment_display#/media/File:7_Segment_Display_with_Labeled_Segments.svg | [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en) | No |
 | arduino_pinout.png     | arduino.cc                      | https://docs.arduino.cc/hardware/micro                   | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | No | 
+| i2c.png                | Tim Mathias via Wikipedia      | https://en.wikipedia.org/wiki/I%C2%B2C#/media/File:I2C_controller-target.svg  | [CC BY-SA 4.0]{https://creativecommons.org/licenses/by-sa/4.0/} | No |
