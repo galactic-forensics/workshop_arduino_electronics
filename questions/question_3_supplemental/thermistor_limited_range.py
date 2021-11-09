@@ -4,20 +4,18 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
 
-# read the csv file
-fname = "thermistor_lookup_table_adafruit_372.csv"
+# read the csv file - using relative path with respect to github repo
+# todo: adjust me if required
+fname = "../../figures/03_temperature/thermistor_lookup_table_adafruit_372.csv"
 data = np.loadtxt(fname, delimiter=",", skiprows=1)
 
-temperature_c = data[:, 0]
-resistance_kohm = data[:, 1]
+temperature_c_all = data[:, 0]
+resistance_kohm_all = data[:, 1]
 
-# calculate temperature according to b-parameter equation
-kelvin_to_c = 273.15
-b_param = 3950  # K
-t0 = 298.15
-temperature_beqn = (
-    1 / (1 / 287 + 1 / b_param * np.log(resistance_kohm / 10)) - kelvin_to_c
-)
+# limit the data to temperature range between -20 and +25 celsius
+mask = np.where(np.logical_and(temperature_c_all >= -20, temperature_c_all <= 25))
+temperature_c = temperature_c_all[mask]
+resistance_kohm = resistance_kohm_all[mask]
 
 # determine a fit for Steinhard-Hall equation and print parameters
 def steinhard_hall(x, a, b, c):
@@ -31,6 +29,7 @@ def steinhard_hall(x, a, b, c):
     return a + b * np.log(x) + c * np.log(x) ** 3
 
 
+kelvin_to_c = 273.15
 temperature_k = temperature_c + kelvin_to_c
 params, _ = curve_fit(steinhard_hall, resistance_kohm, temperature_k)
 
@@ -47,8 +46,7 @@ fig, plt = plt.subplots(1, 1)
 fig.set_size_inches((5, 4))
 
 plt.plot(resistance_kohm, temperature_c, "-", label="Lookup table")
-plt.plot(resistance_kohm, temperature_steinhard_hall_c, ":", label="Steinhard-Hall")
-plt.plot(resistance_kohm, temperature_beqn, "--", label="B-parameter equation")
+plt.plot(resistance_kohm, temperature_steinhard_hall_c, "--", label="Steinhard-Hall")
 # plt.semilogx()
 
 plt.set_xlabel("Resistance (k$\\Omega$)")
@@ -59,4 +57,4 @@ plt.legend()
 fig.tight_layout()
 
 # fig.show()
-fig.savefig("thermistor.pdf")
+fig.savefig("thermistor_limited_range.pdf")
