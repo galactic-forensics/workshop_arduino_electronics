@@ -111,6 +111,14 @@ void loop() {
 \end{lstlisting}
 On the very top of your code, put variable declaration and initialization if required and load the necessary libraries. The \lstinline{setup} function is the part that runs once when you boot up your Arduino. The \lstinline{loop} function will then run repeatedly and, ideally, until you unplug or reset the Arduino. We will see later how to fill these standard functions. In addition, you can of course write your own functions with any names of your choosing, just make sure they do not collide in naming with these default functions. 
 
+
+\infobox{Numbers}{To understand variable declarations in \cpp\ better, we need to remind ourselves how numbers are stored in a computer's / microprocessor's memory. One of the most important types of numbers are integers, declared in \cpp\ as \lstinline{int}. In the Arduino Micro, an integers is 16\,bit in size. This means that 16 positions are available in binary. Integers with a sign can therefore go from $-2^{15}$ to $2^{15}-1$; the first bit is reserved for the sign. An \lstinline{unsigned int} on the other hand goes from $0$ to $2^{16}-1$. Integers of type \lstinline{long} have 32\,bit available.
+
+Decimal point numbers are represented by \lstinline{float}s, which can take values from $-3.4028235\times10^{38}$ to $3.4028235\times10^{38}$. They require 32\,bits of memory to be stored.
+
+You can find more information on different variable types in the \href{https://www.arduino.cc/reference/en/\#variables}{respective Arduino reference section}.}
+
+
 \paragraph{Debugging} When code does not do the thing we expect it to, it is often difficult to exactly see why it does not work. While the Arduino \ac{ide} catches many bugs, it cannot catch logic errors. If you simply code a script on your computer, you might debug it by printing out values to the screen. The same can be done with the Arduino. Unless you have a screen connected to the Arduino, you have to send the values to print via the serial connection to your computer for displaying. The statement \lstinline{Serial.begin(9600);} should go into your setup routine. This begins the serial communication to your computer with a \href{https://en.wikipedia.org/wiki/Baud}{baud rate} of 9600. Inside your main loop, you can then use the following print statements to write to your computer:
 \begin{itemize}
     \item \lstinline{Serial.print("Hello ");} prints "Hello " without a line break.
