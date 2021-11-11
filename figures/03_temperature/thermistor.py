@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.optimize import curve_fit
 
+# parameter precision to print out
+PREC = 12
+
 # read the csv file
 fname = "thermistor_lookup_table_adafruit_372.csv"
 data = np.loadtxt(fname, delimiter=",", skiprows=1)
@@ -32,13 +35,15 @@ def steinhard_hall(x, a, b, c):
 
 
 temperature_k = temperature_c + kelvin_to_c
-params, _ = curve_fit(steinhard_hall, resistance_kohm, temperature_k)
+params, _ = curve_fit(steinhard_hall, resistance_kohm, 1 / temperature_k)
 
 print(
-    f"Parameters Steinhard-Hall: a={params[0]:.3f}, b={params[1]:.3f}, c={params[2]:.3f}"
+    f"Parameters Steinhard-Hall: "
+    f"a={params[0]:.{PREC}f}, b={params[1]:.{PREC}f}, c={params[2]:.{PREC}f}"
 )
+
 temperature_steinhard_hall_c = (
-    steinhard_hall(resistance_kohm, params[0], params[1], params[2]) - kelvin_to_c
+    1 / steinhard_hall(resistance_kohm, params[0], params[1], params[2]) - kelvin_to_c
 )
 
 

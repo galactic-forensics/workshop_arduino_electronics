@@ -58,7 +58,7 @@ The temperature can also be calculated using the \href{https://en.wikipedia.org/
 \begin{equation}
     \frac{1}{T} = a + b\ln{R} + c \left(\ln{R}\right)^{3}. \label{eqn:temperature:steinhard_hall}
 \end{equation}
-Here, $a$, $b$, and $c$ are constants. Doing a curve fit of this equation to the lookup table for the thermistor, we can determine the constants as $a=368.239\,\mathrm{K}^{-1}$, $b=-33.815\,\ln({\mathrm{k}\Omega})^{-1}$, and $c=0.358\,\ln({\mathrm{k}\Omega})^{-3}$. 
+Here, $a$, $b$, and $c$ are constants. Doing a curve fit of this equation to the lookup table for the thermistor, we can determine the constants as $a=2.78522\times10^{-3}\,\mathrm{K}^{-1}$, $b=2.41846\times10^{-4}\,\ln({\mathrm{k}\Omega})^{-1}$, and $c=8.31227\times10^{-7}\,\ln({\mathrm{k}\Omega})^{-3}$. 
 
 A simplified version of above equation, the so-called B-parameter equation (see \href{https://en.wikipedia.org/wiki/Thermistor}{Wikipedia}) assumes that the constants are $a=1/T_0 - (1/B)\ln{R_0}$, $b=1/B$, and $c=0$. We can therefore rewrite equation~\eqref{eqn:temperature:steinhard_hall} as
 \begin{equation}
@@ -72,9 +72,9 @@ Here, $T_0 = 298.15\,$K is room temperature and $R_0 = 10\,\mathrm{k}\Omega$ the
     \caption{Temperature as a function of resistance for \href{https://www.adafruit.com/product/372}{Adafruit 3950 NTC} thermistor}
     \label{fig:temperature:thermistor}
 \end{figure}
-Figure~\ref{fig:temperature:thermistor} shows the temperature determined using the lookup table in comparison with fitting the Steinhard-Hall equation~\eqref{eqn:temperature:steinhard_hall} and the B-parameter equation~\eqref{eqn:temperature:thermistor} results. Clearly, none of these two models give an accurate representation over the whole range.
+Figure~\ref{fig:temperature:thermistor} shows the temperature determined using the lookup table in comparison with fitting the Steinhard-Hall equation~\eqref{eqn:temperature:steinhard_hall} and the B-parameter equation~\eqref{eqn:temperature:thermistor} results. While the B-parameter equation gets close to the real values, it still has a significant offset. The Steinhard-Hall fit to the lookup table on the other hand seems to be a fairly good match.
 
-\qbox{How would you determine the temperature? The lookup table has the most precision, however, what would you do with a resistance that is in between two values in the table? Our setup will have an actual temperature range between around 25\celsius and -20\celsius. Come up with an adequate way to determine the temperature in this range.}
+\qbox{How will you determine the temperature? The lookup table has the most precision, however, what would you do with a resistance that is in between two values in the table? Our setup will have an actual temperature range between around 25\celsius and -20\celsius. How well do the methods compare in this range?}
 
 \qbox{The Arduino Micro has a 10\,bit ADC on board. Assuming a reference resistor $R_\mathrm{ref} = 10\,\mathrm{k}\Omega$, calculate the smallest temperature difference that you would be able to determine with this ADC in the above defined temperature range. }
 
@@ -89,6 +89,14 @@ We will now use the thermistor in order to measure the room temperature. With ab
 \exerbox{In Section~\ref{sec:temperature:thermistor:determining_temperature} we have discussed various approaches of determining the temperature. Implement your solution from above's question in order to calculate the temperature and print it out using the serial monitor. How precise are your readings? Does your room temperature measurement make sense?}
 
 \exerbox{Instead of printing the temperature via the serial monitor, display the temperature on the four-digit, seven-segment display that you have controlled in Chapter~\ref{chap:display}. Be concious about the environment and recycle -- even your code!}
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=0.625\textwidth]{graphics/03_temperature/final_setup.png}
+    \caption{Temperature reading via thermistor and shown using the the four-digit, seven-segment display.}
+    \label{fig:temperature:final_setup}
+\end{figure}
+Figure~\ref{fig:temperature:final_setup} shows the final setup after the last exercise. Note that your setup might of course look slightly different.
 
 Your temperature readings might be varying a lot from measurement to measurement. The reason for this is electronic noise. There are two ways of reducing the effects of such noise: (1) For your result use the average of several measurements. (2) The 5\,V line of the Arduino is fairly unfiltered and depends on the power supply you are using. The 3.3\,V Arduino line (see Figure~\ref{app:pinout}) on the other hand is fairly stable, and it would therefore be advantageous to use this line for ADC measurements. To do so, switch your $V_\mathrm{in}$ to use the 3.3\,V line. You can provide this line to the ADC as a reference voltage. To do so, also connect the \lstinline{AREF} pin to the same 3.3\,V line.
 
