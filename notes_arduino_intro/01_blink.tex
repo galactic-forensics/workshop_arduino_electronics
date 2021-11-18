@@ -44,7 +44,7 @@ As we have discussed above, \acp{led} cannot be dimmed in the traditional way, i
     \item Can you rewrite the routine in order to prevent it from blinking at the highest point? An \href{https://www.arduino.cc/reference/en/language/structure/control-structure/if/}{\lstinline{if} statement} might be useful.
 \end{enumerate}}
 
-The \lstinline{void loop()} function acts as an endless loop. The most commonly used looping structures are \href{https://www.arduino.cc/reference/en/language/structure/control-structure/while/}{\lstinline{while}} and \href{https://www.arduino.cc/reference/en/language/structure/control-structure/for/}{\lstinline{for}} loops. In this sense, the loop function is no different from a \lstinline{while(True)} loop.
+The \lstinline{void loop()} function acts as an endless loop. The most commonly used looping structures are \href{https://www.arduino.cc/reference/en/language/structure/control-structure/while/}{\lstinline{while}} and \href{https://www.arduino.cc/reference/en/language/structure/control-structure/for/}{\lstinline{for}} loops. In fact, the loop function iself underneath is a \lstinline{while(true)} loop.
 
 \exerbox{Inside the \lstinline{void loop()} function, write a \lstinline{for} loop to replace the ramp. Ensure that your loop does not blink, even if you select various fade amounts.}
 
