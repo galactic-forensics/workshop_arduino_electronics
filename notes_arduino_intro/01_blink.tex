@@ -83,7 +83,7 @@ You can then call this function from the main loop by calling \lstinline{myFunct
 \begin{figure}[tb]
     \centering
     \includegraphics[width=0.45\textwidth]{graphics/01_blink/arduino_button_led_tinkercad.jpg}
-    \caption{\href{https://www.tinkercad.com}{TinkerCAD} simulation of Arduino with a button and \ac{led} connected.}
+    \caption{\href{https://www.tinkercad.com/things/5VP2mIHUOxB}{TinkerCAD simulation} of Arduino with a button and \ac{led} connected.}
     \label{fig:intro:button_led}
 \end{figure}
 Most devices that allow for user interactions contain some buttons. We can use the digital \ac{io} pins in order to connect a button. Figure~\ref{fig:intro:button_led} shows a \href{https://www.tinkercad.com}{TinkerCAD} simulation of an Arduino with a button and an \ac{led} connected. Here, we connect the button on one side to the 5\,V output of the Arduino and the other side via a 1\,k$\Omega$ resistor to ground and simultaneously to a digital \ac{io} pin. The resistor limits the current to 5\,mA, see equation~\eqref{eqn:uri}. In the setup routine, we need to set the \lstinline{pinMode} to \lstinline{INPUT}, since we want to read the value that is connected to the pin. If the button is unpressed, the pin is on the same electrical potential as ground and therefore in a low state. If the button is pressed however, the pin is at 5\,V and thus in a high state. In the loop you can, e.g., read the state of the button connected to \lstinline{buttonPin} as:
