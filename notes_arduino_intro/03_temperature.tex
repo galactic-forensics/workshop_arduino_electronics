@@ -1,6 +1,6 @@
 %!TEX root = main_arduino_intro.tex
 
-\chapter{Temperature sensor}
+\chapter{Temperature sensor}\label{chap:temperature}
 
 Temperature is generally measured with a thermocouple. In these devices, two metals are brought together that, due to the \href{https://en.wikipedia.org/wiki/Thermoelectric_effect}{Seebeck effect}, create a temperature-dependent voltage between them. The voltages produced generally are very low and therefore require amplification before they can be read in by an \ac{adc}. Such an amplifier for a K-type thermocouple can, e.g., be found \href{https://www.adafruit.com/product/1778}{here}. In this specific case, the amplification circuit would allow us to read temperatures from -250\celsius\ to +750\celsius, i.e., a total range of 1000\celsius.
 
