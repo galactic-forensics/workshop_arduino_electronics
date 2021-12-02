@@ -22,3 +22,4 @@ The Arduino examples are directly used.
 - Exercise 6 (Soldering only, no code)
 - Exercise 7
 - Exercise 13 (experiment with setup)
+- Exercise 23 (only pin changes)

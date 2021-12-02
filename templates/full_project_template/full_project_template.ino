@@ -5,10 +5,10 @@
 // Load libraries
 // Adafruit Display initialization
 // Variables and Pins for temperature measurement
-// Variables for set temperature, happynes level
+// Variables for set temperature
 // Thermoelectric cooler variables and Pins
 // Button pins to set temperature
-// LED Pins
+// LED Pins and temperature happiness range
 
 void setup() {
   // Initialize Adafruit display
