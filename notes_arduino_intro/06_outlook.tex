@@ -1,0 +1,111 @@
+%!TEX root = main_arduino_intro.tex
+
+\chapter{Further improvements}\label{chap:outlook}
+
+Up to now, we have developed a Peltier cooler and can control its set temperature using a few buttons. This project should also have given you a look into how to build scientific setups with Arduino. We elaborated on digital and analog \ac{io} in order to control and read all kinds of different sensors and devices. In this last chapter, we will now discuss possible further developments for this project in order to direct the interested reader on what could be done next.
+
+
+\section{Rigid setup}
+
+The breadboard setup is great for testing and quickly rearranging cables, however, it is not well suited for regular use once you have finished developing your project. If you want to use the developed setup further, several steps can be taken to make it more rigid.
+
+\subsection{Soldering a fixed setup}
+
+To have a more robust setup, it is often worth to solder the components onto a board. One possibility on how to solder the components into place is to use a perma-proto board, see \href{https://www.adafruit.com/product/571}{here} for one example. These boards work similar to the bread board that you used, however, you have to solder all the connections in place. Alternatively, you could use a \href{https://en.wikipedia.org/wiki/Perfboard}{perfboard}, which simply has holes and no lines connected. There are various versions available for these components and it is ultimately up to you to choose what you prefer.
+
+Figure~\textcolor{red}{XXX} shows an image of the setup that we developed soldered onto an Adafruit perma-proto board. The Arduino and the display in this case are not soldered in place. We rather soldered female headers in place where these components can plug in. This would allow us to remove these parts without a major de-soldering project.
+
+
+\subsection{Case}
+
+To have a lab setup that is used actively, it is often useful to not only solder the setup that we want to use regularly, but also to put it in some type of enclosure. Many different enclosures are feasible and possible. For example, you can purchase an existing enclosure and simply adopt it for your needs. 
+
+Another possibility is to print an enclosure for your setup using a \href{https://en.wikipedia.org/wiki/3D_printing}{3D printer}. For example, you could design a case using \ac{cad} software such as \href{https://www.freecad.org/}{FreeCAD}. An example for a simple enclosure that keeps the bottom of our setup enclosed is shown in Figure~\textcolor{red}{XXX}. The FreeCAD and associated files can be found on \href{https://github.com/galactic-forensics/workshop_arduino_electronics/tree/main/3d_files}{GitHub}. Great resources on campus can also be found in the \href{https://www.brandeis.edu/library/research-technology-innovation/makerlab.html}{Brandeis Maker Lab}.
+
+
+\subsection{\Ac{pcb} development}
+
+Today, there are suppliers that produce small-quantity \acp{pcb} for low prices. It can therefore be worth if your project needs to be duplicated multiple times, to design and manufacture a \ac{pcb} for it. Many hints on how to do so can be found online, e.g., \href{https://maker.pro/arduino/projects/7-tips-for-beginners-about-how-to-design-a-pcb-1}{here}. Tools to design \acp{pcb} are for example \href{https://www.kicad.org/}{KiCAD} and \href{https://easyeda.com/}{EasyEDA}. A great resource on campus to consult is the \href{https://www.brandeis.edu/library/research-technology-innovation/automation.html}{Brandeis Automation Lab}.
+
+
+\section{Control theory to drive cooling}
+
+\section{Heating and cooling}
+
+\url{https://en.wikipedia.org/wiki/H-bridge}
+
+\begin{figure}[tb]
+    \centering
+    \includegraphics[width=250px]{graphics/06_further/h-bridge.png}
+    \caption{Schematic of an H-bridge. The ``H'' shape is laying on the side in this Figure. If the \acp{mosfet} labeled A1 and A2 are closed, the current will flow along arrow $I_A$ through device D. If the \acp{mosfet} labeled B1 and B2 are closed, the current will flow along arrow $I_B$. The n\ac{mosfet} drawing is adopted from \href{https://en.wikipedia.org/wiki/Electronic_symbol\#/media/File:Enh_N_channel_Mosfet.svg}{ErikBuer via Wikipedia}, license: \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}.}
+    \label{fig:figure1}
+\end{figure}
+
+
+\section{Data recording}
+
+\subsection{Record data on storage medium}
+
+Many different ways exist to log data using an Arduino. For example, you could use a \href{https://www.arrow.com/en/products/1141/adafruit-industries}{data logging shield}, i.e., an extension board, that allows you to plug an SD card into the Arduino and record data on it. Libraries to record data as well as examples can be found on the web, e.g., \href{https://www.arrow.com/en/research-and-events/articles/data-logging-with-arduino-tutorial}{here}.
+
+\subsection{Data in the cloud}
+
+Certain types of Arduinos that have web capabilities can also be used in combination with the \href{https://docs.arduino.cc/cloud/iot-cloud}{Arduino \ac{iot} cloud}. This allows you to connect your setup to the internet and record measurement points online. A free plan allows you to test out the Arduino \ac{iot} cloud. 
+
+\subsection{Data recording via serial and python}
+
+Another, interesting option is to use the serial interface that Arduino comes with by default and read out the serial commands. Below are example files, full, working examples can be found on \href{https://github.com/galactic-forensics/workshop_arduino_electronics/tree/main/further_examples/data_logger}{GitHub}. 
+
+\paragraph{Arduino setup} We have so far used the serial protocol in order to print information from the Arduino to the serial console. Let us set up an Arduino with an \ac{led} connected to \lstinline{ledPin}. We also store a \lstinline{float result = 23.5}, which is the thing we want to print via serial when asked for it. In the setup, we therefore want to setup the following code:
+\begin{lstlisting}
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  Serial.begin(9600);
+}
+\end{lstlisting}
+Here, we first set up the \ac{led} as an output, and then initialize the serial interface with a baud rate of 9600 bits per second, see \href{https://www.arduino.cc/en/Serial.Begin}{here} for more information.
+
+Let us assume that we have setup a function called \lstinline{blink_led()} to blink the \ac{led}. We can then set up the main loop code as following:
+\begin{lstlisting}
+void loop() {
+
+  char inByte;  // where to store the read data
+  
+  if (Serial.available() > 0) {
+    inByte = Serial.read();
+
+    if (inByte == '?') {
+      Serial.println(result);
+      blink_led();
+    } 
+  }
+}
+\end{lstlisting}
+Here, we first initialize a variable for one single character. We then ask if Serial data are available and if they are, we read each character into \lstinline{inByte}. It is important. If this character is equal to \lstinline{?}, we print the defined result back to the serial console and blink the \ac{led}, otherwise we do nothing. 
+
+Two things that you should notice here: (1) If you send one question mark from the Arduino serial console and it is set up to send a newline at the end, you in fact send two characters, a question mark and a newline character. However, the program only responds to the question mark and all other characters are ignored. (2) Note that we send the result using the \lstinline{Serial.println()} command, i.e., we print a newline character at the end of our return. Assuming there are no other newline characters in the result, we can use this line termination scheme to later determine where the result has in fact terminated. This will come in handy in a little bit.
+
+
+\paragraph{Querying the serial interface with Python}
+While the Arduino serial console is great for debugging, it is not made to record and log data. However, we do not require communications via the Arduino serial console but can use any console that can communicate (send and receive commands) via serial in order to build our data logger. Below example shows one very simple way of communicating with the Arduino via the setup serial interface from \href{https://www.python.org/}{Python}. Here, we use the \href{https://pyserial.readthedocs.io/en/latest/pyserial.html}{\texttt{pySerial}} library for the communication. The following code presents a very simple python script to get and print the result:
+\begin{lstlisting}[language=python]
+import serial
+
+PORT = "/dev/ttyACM1"
+
+dev = serial.Serial(PORT, 9600)
+
+dev.write(b"?")
+result = dev.readline()
+
+print(result)
+\end{lstlisting}
+We first import the \lstinline{pySerial} package. We then define the \lstinline{PORT} where the Arduino can be found. On a unix based system, the ports are as in the above example, on Windows however, you would look for something like \lstinline{COM3}. We then assign a variable \lstinline{dev} to the device an use \lstinline{pySerial} package to open the communications with the port. To query the temperature, we have to send a question mark to the Arduino. We can do so using the \lstinline{write} command and send a question mark that has been encoded to binary, i.e., \lstinline{b"?"}. We then read the next line that came back from the device, store it as a \lstinline{result}, and then print this stored value.
+
+Once you run this program, which can be found \href{https://github.com/galactic-forensics/workshop_arduino_electronics/blob/main/further_examples/data_logger/simple_query.py}{here on GitHub}, you will see that (1) the \ac{led} blinks when the program runs and (2) that the string \lstinline{b'23.50\r\n'} is returned. The returned string is of course also binary encoded and, in order to get a regular string as you are used to, you would have to decode this binary string. Furthermore, you might want to strip the carriage return (\lstinline{\r}) and newline (\lstinline{\n}) characters. You could clean up the result string as following:
+\begin{lstlisting}[language=python]
+result = float(result.decode("utf-8").rstrip())
+\end{lstlisting}
+This decodes the result, strips the empty characters on the right side of the string, and then converts it to a float. 
+
+We can of course also extend this simplest possible example into an actual data logger. A simple example how this could be achieved in Python can be found on GitHub with the filename \href{https://github.com/galactic-forensics/workshop_arduino_electronics/blob/main/further_examples/data_logger/data_logger.py}{\lstinline{data_logger.py}}. The python file is extensively commented and records a given set of measurements with defined intervals in between and saves them as a \ac{csv} file. The important part to remember is the following: The serial interface allows you to easily control and drive the Arduino from your computer. If you adjust your firmware accordingly, you will be able to interact with your Arduino by other means, e.g., via Python as well. This can be extremely useful for further development and data recording.
