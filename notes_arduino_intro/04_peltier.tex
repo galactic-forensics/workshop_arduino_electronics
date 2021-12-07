@@ -1,13 +1,13 @@
 %!TEX root = main_arduino_intro.tex
 
-\chapter{Thermoelectric cooling element}
+\chapter{Thermoelectric cooling element}\label{chap:tec}
 
 The final part that we need to implement in order to build a sample cooling system is the actual cooling element. As a cooling element, we will use a Peltier cooler from \href{https://www.adafruit.com/product/1335}{Adafruit}, which is mounted onto a heat sink and fan assembly.
 
 
 \section{Components and their Physics}
 
-\subsection{The Peltier effect}
+\subsection{The Peltier effect}\label{sec:tec:peltier_effect}
 
 Thermoelectric coolers make use of the so-called Peltier effect in order to create a heat flux between two different types of materials. This means that heat flows from one element to the other, i.e., that one side gets cold and the other one hot. The Peltier effect was discovered in 1834 by French Physicist \href{https://en.wikipedia.org/wiki/Jean_Charles_Athanase_Peltier}{Jean Charles Athanase Peltier}. In principle, it works similar to a thermocouple, which we discussed above.
 \begin{figure}[b!]

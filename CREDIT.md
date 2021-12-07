@@ -14,4 +14,5 @@ They are sorted by filename.
 | nMOSFET                | Biezl, Olivier Deleage, and Peter Scott via Wikipedia  | https://en.wikipedia.org/wiki/MOSFET#/media/File:MOSFET_functioning_body.svg | [CC By-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) | No |
 | nMOSFET_symbol / H-Bridge         | ErikBuer via Wikipedia    | https://en.wikipedia.org/wiki/Electronic_symbol#/media/File:Enh_N_channel_Mosfet.svg | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |  No / Yes |
 | peltier_cooler         | Ken Brazier via Wikipedia | https://en.wikipedia.org/wiki/File:Thermoelectric_Cooler_Diagram.svg | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) | No |
+| pid                    | Arturo Urquizo via Wikipedia | https://en.wikipedia.org/wiki/File:PID_en.svg | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/deed.en) | No |
 | resistive_divider      | Krishnavedala via Wikipedia    | https://en.wikipedia.org/wiki/Voltage_divider#/media/File:Resistive_divider2.svg | [CC0](https://creativecommons.org/publicdomain/zero/1.0/deed.en) | Yes |

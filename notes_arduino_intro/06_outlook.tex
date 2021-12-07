@@ -28,19 +28,62 @@ Another possibility is to print an enclosure for your setup using a \href{https:
 Today, there are suppliers that produce small-quantity \acp{pcb} for low prices. It can therefore be worth if your project needs to be duplicated multiple times, to design and manufacture a \ac{pcb} for it. Many hints on how to do so can be found online, e.g., \href{https://maker.pro/arduino/projects/7-tips-for-beginners-about-how-to-design-a-pcb-1}{here}. Tools to design \acp{pcb} are for example \href{https://www.kicad.org/}{KiCAD} and \href{https://easyeda.com/}{EasyEDA}. A great resource on campus to consult is the \href{https://www.brandeis.edu/library/research-technology-innovation/automation.html}{Brandeis Automation Lab}.
 
 
-\section{Control theory to drive cooling}
+\section{Proportional control}
+
+When fully assembled, we seen that our simple implementation was already capable of keeping the Peltier element within 0.5\celsius\ of the set temperature when the thermistor was directly stuck onto the cooling element. This was already achieved when simply turning the controller on and off. However, we have also demonstrated that we can in fact drive the cooler by setting the \ac{pwm} accordingly.
+
+\subsection{\ac{pid} controller}
+
+A \ac{pid} controller corrects a given system, e.g., our cooler, based on proportional (P), integral (I), and derivative (D) terms, respectively. 
+\begin{figure}[tb]
+  \centering
+  \includegraphics[width=0.8\textwidth]{graphics/06_further/pid.png}
+  \caption{\ac{pid} control block diagram in a feedback loop. Credit: \href{https://en.wikipedia.org/wiki/File:PID_en.svg}{Arturo Urquizo}, License: \href{https://creativecommons.org/licenses/by-sa/3.0/deed.en}{CC BY-SA 3.0}.}
+  \label{fig:outlook:pid}
+\end{figure}
+Figure~\ref{fig:outlook:pid} shows a block diagram of the control loop for a \ac{pid} controller. The set point is denoted $r(t)$, the achieved point $y(t)$. The ``plant / process'' in this diagram would be our thermoelectric cooler. From set point and current value, an error $e(t)$ is calculated. This error via multiple terms, here all three \ac{pid} terms, and a response $u(t)$ is calculated. The overall control function takes the form
+\begin{equation}
+u(t) = \underbrace{K_p e(t)}_{\equiv P} + \underbrace{K_i \int_0^t e(\tau) d\tau}_{\equiv I} + \underbrace{K_dd \frac{de(t)}{dt}}_{\equiv D}.
+\end{equation}
+Here, the constants $K_p$, $K_i$, and $K_d$ are positive constants that have to be determined for every system.
+
+In \ac{pid}, the first term (P) will make a proportional response, e.g., if the error $e(t)$ is large, a large correction will be made. The second term (I) integrates all corrects made such far and therfore creates a memory effect. The last term (D) is best described as a prediction value. A much more detailed explanation of \ac{pid} control theory can be found on \href{https://en.wikipedia.org/wiki/PID_controller}{Wikipedia}.
+
+
+\subsection{Proportional controller for our cooler}
+
+Let us try and implement a proportional feedback for our cooler. Since we can only cool, we can only apply the proportional part when our sample is too warm, otherwise, we will continue to simply turn the Peltier element off and let it warm up by itself. We can simply apply the proportionality by turning the \ac{pwm} output up and down. 
+
+We need to define $K_p$ in units of K$^{-1}$. At full power, we will drive the \ac{pwm} at 100\%. This level will proportionally drop with lower values of $e(t)$. Since we cannot drive the gate of the \ac{mosfet} with more than 12\,V, we will automatically generate a control function that contains a step in it. For a given $K_p$ and a given temperature difference $\Delta T$, we can calculate the response $u(t)$ (from 0 to 1) as:
+\begin{equation}
+  u(t) = \left\{ 
+    \begin{array}{ll}
+      K_p \Delta T,   & \Delta T \leq \frac{1}{K_p} \\
+      1,              & \Delta T > \frac{1}{K_p}
+    \end{array}
+  \right.
+\end{equation}
+
+An example implementation for a \textcolor{red}{enter used value} $K_p = 0.5\,\mathrm{K}^{-1}$ and our thermoelectric cooler can be found on \href{https://github.com/galactic-forensics/workshop_arduino_electronics/tree/main/further_examples/p_control}{GitHub}. Note that we only had do adopt the \lstinline{void controlTEC()} routine.
+
+
+
 
 \section{Heating and cooling}
 
-\url{https://en.wikipedia.org/wiki/H-bridge}
+The Peltier effect (Section~\ref{sec:tec:peltier_effect}) and thus the thermoelectric cooler can be run in either direction. This means that if we would reverse the polarity of the applied voltage and therefore reverse the current flow, the side that has so far been used as a cooler would start to heat up and the other side cool down. This also allows us to actively drive the thermoelectric cooler as a heater.
 
+So far, we used one n\ac{mosfet} in order to drive the cooler, see Chapter~\ref{chap:tec}. Adding three more n\acp{mosfet}, we could build a so-called \href{https://en.wikipedia.org/wiki/H-bridge}{H-bridge}. 
 \begin{figure}[tb]
     \centering
     \includegraphics[width=250px]{graphics/06_further/h-bridge.png}
     \caption{Schematic of an H-bridge. The ``H'' shape is laying on the side in this Figure. If the \acp{mosfet} labeled A1 and A2 are closed, the current will flow along arrow $I_A$ through device D. If the \acp{mosfet} labeled B1 and B2 are closed, the current will flow along arrow $I_B$. The n\ac{mosfet} drawing is adopted from \href{https://en.wikipedia.org/wiki/Electronic_symbol\#/media/File:Enh_N_channel_Mosfet.svg}{ErikBuer via Wikipedia}, license: \href{https://creativecommons.org/licenses/by-sa/4.0/}{CC BY-SA 4.0}.}
-    \label{fig:figure1}
+    \label{fig:outlook:h-bridge}
 \end{figure}
+Figure~\ref{fig:outlook:h-bridge} shows a schematic drawing of an H-bridge. Note that the 
+``H'' is laying on its side, the two vertical bars represented by the two n\acp{mosfet} and the horizontal bar with the device D in the middle. If we apply voltage to the gates of the n\acp{mosfet} A1 and A2, the current will flow in direction $I_A$ through the device D. If we, on the other hand, apply voltage to the gates for n\acp{mosfet} B1 and B2, the current flows in the reverse direction, as indicated by arrow $I_B$. 
 
+H-bridges are typically used to drive \ac{dc} motors since the reversal allows us to drive the motor in either direction. You can also find assembled H-bridges online, e.g., \href{https://www.electronics-lab.com/project/5-amp-h-bridge-dc-motor-driver-using-mc33886/}{here}. Make sure that the current rating is appropriate for your application and that the you understand how the H-bridge works. For example, the circuit shown in Figure~\ref{fig:outlook:h-bridge} would allow you to short the circuit by opening A1 and B2 or B1 and A2. Such shorts should generally be avoided in order to not damage the components.
 
 \section{Data recording}
 
