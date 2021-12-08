@@ -1,0 +1,393 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr USLetter 11000 8500
+encoding utf-8
+Sheet 1 1
+Title "Final Project - Arduino controlled sample cooler"
+Date "2021-12-08"
+Rev "1"
+Comp ""
+Comment1 "rt"
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L power:+12V #PWR0101
+U 1 1 61B15C89
+P 3100 3800
+F 0 "#PWR0101" H 3100 3650 50  0001 C CNN
+F 1 "+12V" H 3115 3973 50  0000 C CNN
+F 2 "" H 3100 3800 50  0001 C CNN
+F 3 "" H 3100 3800 50  0001 C CNN
+	1    3100 3800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Transistor_FET:IRLB8721PBF Ada:355
+U 1 1 61B18184
+P 3200 2800
+F 0 "Ada:355" H 3405 2754 50  0000 L CNN
+F 1 "IRLB8721PBF" H 3405 2845 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 3450 2725 50  0001 L CIN
+F 3 "http://www.infineon.com/dgdl/irlb8721pbf.pdf?fileId=5546d462533600a40153566056732591" H 3200 2800 50  0001 L CNN
+	1    3200 2800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:Peltier_Element Ada:1335
+U 1 1 61B1D52E
+P 3100 3350
+F 0 "Ada:1335" V 3146 3306 50  0000 R CNN
+F 1 "Peltier_Element" V 3055 3306 50  0000 R CNN
+F 2 "" H 3100 3280 50  0001 C CNN
+F 3 "~" V 3100 3375 50  0001 C CNN
+	1    3100 3350
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3100 3800 3100 3600
+Wire Wire Line
+	3100 3150 3100 3000
+Connection ~ 3100 3800
+$Comp
+L Connector:Jack-DC Ada:368
+U 1 1 61B1F5E9
+P 3200 4100
+F 0 "Ada:368" V 3303 3920 50  0000 R CNN
+F 1 "Jack-DC" V 3212 3920 50  0000 R CNN
+F 2 "" H 3250 4060 50  0001 C CNN
+F 3 "~" H 3250 4060 50  0001 C CNN
+	1    3200 4100
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4650 2800 4650 3950
+$Comp
+L Motor:Fan PeltierFan
+U 1 1 61B64489
+P 2700 3300
+F 0 "PeltierFan" H 2543 3304 50  0000 R CNN
+F 1 "Fan" H 2543 3395 50  0000 R CNN
+F 2 "" H 2700 3310 50  0001 C CNN
+F 3 "~" H 2700 3310 50  0001 C CNN
+	1    2700 3300
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	2700 3600 3100 3600
+Connection ~ 3100 3600
+Wire Wire Line
+	3100 3600 3100 3550
+$Comp
+L Device:LED LED2
+U 1 1 61B6E769
+P 4750 2350
+F 0 "LED2" V 4697 2430 50  0000 L CNN
+F 1 "green" V 4788 2430 50  0000 L CNN
+F 2 "" H 4750 2350 50  0001 C CNN
+F 3 "~" H 4750 2350 50  0001 C CNN
+	1    4750 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Thermistor Thermistor
+U 1 1 61B73C1F
+P 4600 5750
+F 0 "Thermistor" V 4842 5750 50  0000 C CNN
+F 1 "Ada 372" V 4751 5750 50  0000 C CNN
+F 2 "" H 4600 5750 50  0001 C CNN
+F 3 "~" H 4600 5750 50  0001 C CNN
+	1    4600 5750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 61B7477F
+P 5050 5750
+F 0 "R6" V 5257 5750 50  0000 C CNN
+F 1 "10k" V 5166 5750 50  0000 C CNN
+F 2 "" V 4980 5750 50  0001 C CNN
+F 3 "~" H 5050 5750 50  0001 C CNN
+	1    5050 5750
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4900 5750 4850 5750
+Wire Wire Line
+	4850 5150 4850 5750
+Connection ~ 4850 5750
+Wire Wire Line
+	4850 5750 4800 5750
+$Comp
+L Device:R R2
+U 1 1 61B83A9A
+P 4750 2050
+F 0 "R2" H 4820 2096 50  0000 L CNN
+F 1 "1k" H 4820 2005 50  0000 L CNN
+F 2 "" V 4680 2050 50  0001 C CNN
+F 3 "~" H 4750 2050 50  0001 C CNN
+	1    4750 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 61B47CCB
+P 4250 2050
+F 0 "R1" H 4320 2096 50  0000 L CNN
+F 1 "1k" H 4320 2005 50  0000 L CNN
+F 2 "" V 4180 2050 50  0001 C CNN
+F 3 "~" H 4250 2050 50  0001 C CNN
+	1    4250 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5650 5150 5650 5600
+Text GLabel 8950 6000 0    50   Input ~ 0
+5V
+Text GLabel 1850 1750 0    50   Input ~ 0
+GND
+Wire Wire Line
+	4400 5750 2100 5750
+$Comp
+L Switch:SW_MEC_5E B_plus
+U 1 1 61BBE7F6
+P 6900 2700
+F 0 "B_plus" H 6900 3085 50  0000 C CNN
+F 1 "Ada 367" H 6900 2994 50  0000 C CNN
+F 2 "" H 6900 3000 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 6900 3000 50  0001 C CNN
+	1    6900 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 61BC8876
+P 6150 2050
+F 0 "R3" H 6220 2096 50  0000 L CNN
+F 1 "1k" H 6220 2005 50  0000 L CNN
+F 2 "" V 6080 2050 50  0001 C CNN
+F 3 "~" H 6150 2050 50  0001 C CNN
+	1    6150 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 61BC911E
+P 6700 2050
+F 0 "R4" H 6770 2096 50  0000 L CNN
+F 1 "1k" H 6770 2005 50  0000 L CNN
+F 2 "" V 6630 2050 50  0001 C CNN
+F 3 "~" H 6700 2050 50  0001 C CNN
+	1    6700 2050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 61BC99C7
+P 7250 2050
+F 0 "R5" H 7320 2096 50  0000 L CNN
+F 1 "1k" H 7320 2005 50  0000 L CNN
+F 2 "" V 7180 2050 50  0001 C CNN
+F 3 "~" H 7250 2050 50  0001 C CNN
+	1    7250 2050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 2700 6150 2850
+Wire Wire Line
+	6150 2850 5150 2850
+Wire Wire Line
+	5150 2850 5150 3950
+Wire Wire Line
+	5250 3950 5250 2950
+Wire Wire Line
+	5250 2950 6700 2950
+Wire Wire Line
+	6700 2950 6700 2700
+Wire Wire Line
+	7250 2700 7250 3050
+Wire Wire Line
+	7250 3050 5350 3050
+Wire Wire Line
+	5350 3050 5350 3950
+Entry Wire Line
+	2000 1750 2100 1850
+Entry Wire Line
+	2600 1750 2700 1850
+Entry Wire Line
+	4650 1750 4750 1850
+Entry Wire Line
+	5550 1750 5650 1850
+Entry Wire Line
+	6050 1750 6150 1850
+Entry Wire Line
+	6600 1750 6700 1850
+Entry Wire Line
+	7150 1750 7250 1850
+$Comp
+L Switch:SW_MEC_5E B_minus
+U 1 1 61BBF4B5
+P 7450 2700
+F 0 "B_minus" H 7450 3085 50  0000 C CNN
+F 1 "Ada 367" H 7450 2994 50  0000 C CNN
+F 2 "" H 7450 3000 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 7450 3000 50  0001 C CNN
+	1    7450 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED LED1
+U 1 1 61B48610
+P 4250 2350
+F 0 "LED1" V 4197 2430 50  0000 L CNN
+F 1 "red" V 4288 2430 50  0000 L CNN
+F 2 "" H 4250 2350 50  0001 C CNN
+F 3 "~" H 4250 2350 50  0001 C CNN
+	1    4250 2350
+	0    1    1    0   
+$EndComp
+$Comp
+L Switch:SW_MEC_5E B_set
+U 1 1 61B86192
+P 6350 2700
+F 0 "B_set" H 6350 3085 50  0000 C CNN
+F 1 "Ada 367" H 6350 2994 50  0000 C CNN
+F 2 "" H 6350 3000 50  0001 C CNN
+F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371" H 6350 3000 50  0001 C CNN
+	1    6350 2700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6150 1850 6150 1900
+Wire Wire Line
+	6150 2200 6150 2600
+Wire Wire Line
+	6700 2600 6700 2200
+Wire Wire Line
+	6700 1900 6700 1850
+Wire Wire Line
+	7250 1850 7250 1900
+Wire Wire Line
+	7250 2200 7250 2600
+Wire Wire Line
+	4750 1850 4750 1900
+Wire Wire Line
+	4250 1900 4250 1850
+Wire Wire Line
+	4750 3950 4750 2500
+Wire Wire Line
+	3300 3800 3850 3800
+Wire Wire Line
+	2700 1850 2700 3100
+Entry Wire Line
+	4150 1750 4250 1850
+Entry Wire Line
+	3000 1750 3100 1850
+Wire Wire Line
+	3100 2600 3100 1850
+Entry Wire Line
+	8950 4700 8850 4800
+Wire Wire Line
+	7200 4250 7000 4250
+Wire Wire Line
+	7000 4250 7000 4800
+Wire Wire Line
+	7000 4800 8850 4800
+Entry Wire Line
+	7850 1750 7950 1850
+Wire Wire Line
+	7950 3500 7950 1850
+Wire Wire Line
+	5450 3950 5450 3600
+Wire Wire Line
+	7500 3600 7500 4250
+Wire Wire Line
+	5550 3950 5550 3700
+Entry Wire Line
+	8950 5500 8850 5600
+Entry Wire Line
+	8950 5650 8850 5750
+Wire Wire Line
+	5650 5600 8850 5600
+Wire Wire Line
+	8850 5750 5200 5750
+Entry Wire Line
+	6450 3300 6550 3200
+Entry Wire Line
+	7000 3300 7100 3200
+Entry Wire Line
+	7550 3300 7650 3200
+Wire Wire Line
+	6550 2700 6550 3200
+Wire Wire Line
+	7100 2700 7100 3200
+Wire Wire Line
+	7650 2700 7650 3200
+Wire Wire Line
+	2100 1850 2100 5750
+NoConn ~ 5650 3700
+NoConn ~ 5650 3600
+NoConn ~ 5650 3050
+NoConn ~ 5650 2950
+NoConn ~ 5650 2850
+$Comp
+L final_project-rescue:7segBackpack-New_Library Ada:878
+U 1 1 61B16CC7
+P 3650 4650
+F 0 "Ada:878" H 7628 4929 50  0000 L CNN
+F 1 "7segBackpack" H 7628 4838 50  0000 L CNN
+F 2 "" H 7350 5300 50  0001 C CNN
+F 3 "" H 7350 5300 50  0001 C CNN
+	1    3650 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7300 3500 7950 3500
+Wire Wire Line
+	7300 3500 7300 4250
+Wire Wire Line
+	7400 3700 7400 4250
+Wire Wire Line
+	5450 3600 7500 3600
+$Comp
+L Arduino:Arduino_Micro A000053
+U 1 1 61B0E640
+P 5350 4550
+F 0 "A000053" V 5297 5480 60  0000 L CNN
+F 1 "Arduino_Micro" V 5403 5480 60  0000 L CNN
+F 2 "Arduino:Arduino_Micro" H 5350 3600 60  0001 C CNN
+F 3 "https://store.arduino.cc/usa/arduino-micro" H 5500 3500 60  0001 C CNN
+	1    5350 4550
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5550 3700 7400 3700
+Wire Wire Line
+	5650 1850 5650 3950
+NoConn ~ 7300 3600
+NoConn ~ 7300 3700
+NoConn ~ 7950 3300
+NoConn ~ 6550 2950
+NoConn ~ 6550 3050
+NoConn ~ 7100 3050
+Wire Wire Line
+	4250 2500 4250 2800
+Connection ~ 4250 2800
+Wire Wire Line
+	4250 2800 4650 2800
+Wire Wire Line
+	3400 2800 4250 2800
+Wire Wire Line
+	3850 3800 3850 1850
+Entry Wire Line
+	3750 1750 3850 1850
+NoConn ~ 3850 2800
+Wire Bus Line
+	6450 3300 8950 3300
+Wire Bus Line
+	8950 3300 8950 6000
+Wire Bus Line
+	1850 1750 7850 1750
+$EndSCHEMATC

@@ -1,0 +1,20 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# 7segBackpack-New_Library
+#
+DEF 7segBackpack-New_Library Ada:878 0 40 Y Y 1 F N
+F0 "Ada:878" 3700 650 50 H V C CNN
+F1 "7segBackpack-New_Library" 3700 750 50 H V C CNN
+F2 "" 3700 650 50 H I C CNN
+F3 "" 3700 650 50 H I C CNN
+DRAW
+S 3450 300 3950 50 0 1 0 N
+X V+ + 3550 400 100 D 50 50 1 1 I
+X GND - 3650 400 100 D 50 50 1 1 I
+X SCL C 3850 400 100 D 50 50 1 1 I
+X SDA D 3750 400 100 D 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+#End Library
