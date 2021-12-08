@@ -43,14 +43,14 @@ int minSetTemp = -10;
 const int controlPinTEC = 11;  // use PWM pin for future development
 
 // Button pins to set temperature
-const int setModeButton = 4;
+const int setModeButton = 6;
 const int setPlusButton = 5;
-const int setMinusButton = 6;
+const int setMinusButton = 4;
 
 int buttonInteractionTime = 250;  // human interaction time in ms with buttons
 
 // LED Pins and temperature happiness range
-const int ledOk = 9;
+const int ledOk = 12;
 float happiness_delta = 0.5;  // +- this delta, our unit is running great!
 
 void setup() {
