@@ -41,6 +41,7 @@ int minSetTemp = -10;
 
 // Thermoelectric cooler variables and Pins
 const int controlPinTEC = 11;  // use PWM pin for future development
+const int controlLedPin = 9;  // Where the control (red) LED is connected to
 
 // Button pins to set temperature
 const int setModeButton = 6;
@@ -62,6 +63,7 @@ void setup() {
   pinMode(setPlusButton, INPUT);
   pinMode(setMinusButton, INPUT);
   pinMode(controlPinTEC, OUTPUT);
+  pinMode(controlLedPin, OUTPUT);
   pinMode(ledOk, OUTPUT);
 }
 
@@ -140,9 +142,11 @@ void controlTEC() {
   // Control the termoelectric cooler.
   if (currentTemperature > float(setPoint)) {  // it's too warm
     digitalWrite(controlPinTEC, HIGH);
+    digitalWrite(controlLedPin, HIGH);
   }
   else {  // it's just right or too cold
     digitalWrite(controlPinTEC, LOW);
+    digitalWrite(controlLedPin, LOW);
   }
 }
 
