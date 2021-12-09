@@ -81,14 +81,14 @@ Connection ~ 3100 3600
 Wire Wire Line
 	3100 3600 3100 3550
 $Comp
-L Device:LED LED2
+L Device:LED LED1
 U 1 1 61B6E769
-P 4750 2350
-F 0 "LED2" V 4697 2430 50  0000 L CNN
-F 1 "green" V 4788 2430 50  0000 L CNN
-F 2 "" H 4750 2350 50  0001 C CNN
-F 3 "~" H 4750 2350 50  0001 C CNN
-	1    4750 2350
+P 4550 2350
+F 0 "LED1" V 4497 2430 50  0000 L CNN
+F 1 "green" V 4588 2430 50  0000 L CNN
+F 2 "" H 4550 2350 50  0001 C CNN
+F 3 "~" H 4550 2350 50  0001 C CNN
+	1    4550 2350
 	0    1    1    0   
 $EndComp
 $Comp
@@ -103,10 +103,10 @@ F 3 "~" H 4600 5750 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Device:R R6
+L Device:R R7
 U 1 1 61B7477F
 P 5050 5750
-F 0 "R6" V 5257 5750 50  0000 C CNN
+F 0 "R7" V 5257 5750 50  0000 C CNN
 F 1 "10k" V 5166 5750 50  0000 C CNN
 F 2 "" V 4980 5750 50  0001 C CNN
 F 3 "~" H 5050 5750 50  0001 C CNN
@@ -123,12 +123,12 @@ Wire Wire Line
 $Comp
 L Device:R R2
 U 1 1 61B83A9A
-P 4750 2050
-F 0 "R2" H 4820 2096 50  0000 L CNN
-F 1 "1k" H 4820 2005 50  0000 L CNN
-F 2 "" V 4680 2050 50  0001 C CNN
-F 3 "~" H 4750 2050 50  0001 C CNN
-	1    4750 2050
+P 4550 2050
+F 0 "R2" H 4620 2096 50  0000 L CNN
+F 1 "1k" H 4620 2005 50  0000 L CNN
+F 2 "" V 4480 2050 50  0001 C CNN
+F 3 "~" H 4550 2050 50  0001 C CNN
+	1    4550 2050
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -136,7 +136,7 @@ L Device:R R1
 U 1 1 61B47CCB
 P 4250 2050
 F 0 "R1" H 4320 2096 50  0000 L CNN
-F 1 "1k" H 4320 2005 50  0000 L CNN
+F 1 "10k" H 4320 2005 50  0000 L CNN
 F 2 "" V 4180 2050 50  0001 C CNN
 F 3 "~" H 4250 2050 50  0001 C CNN
 	1    4250 2050
@@ -162,10 +162,10 @@ F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R3
+L Device:R R4
 U 1 1 61BC8876
 P 6150 2050
-F 0 "R3" H 6220 2096 50  0000 L CNN
+F 0 "R4" H 6220 2096 50  0000 L CNN
 F 1 "1k" H 6220 2005 50  0000 L CNN
 F 2 "" V 6080 2050 50  0001 C CNN
 F 3 "~" H 6150 2050 50  0001 C CNN
@@ -173,10 +173,10 @@ F 3 "~" H 6150 2050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R4
+L Device:R R5
 U 1 1 61BC911E
 P 6700 2050
-F 0 "R4" H 6770 2096 50  0000 L CNN
+F 0 "R5" H 6770 2096 50  0000 L CNN
 F 1 "1k" H 6770 2005 50  0000 L CNN
 F 2 "" V 6630 2050 50  0001 C CNN
 F 3 "~" H 6700 2050 50  0001 C CNN
@@ -184,10 +184,10 @@ F 3 "~" H 6700 2050 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R5
+L Device:R R6
 U 1 1 61BC99C7
 P 7250 2050
-F 0 "R5" H 7320 2096 50  0000 L CNN
+F 0 "R6" H 7320 2096 50  0000 L CNN
 F 1 "1k" H 7320 2005 50  0000 L CNN
 F 2 "" V 7180 2050 50  0001 C CNN
 F 3 "~" H 7250 2050 50  0001 C CNN
@@ -217,7 +217,7 @@ Entry Wire Line
 Entry Wire Line
 	2600 1750 2700 1850
 Entry Wire Line
-	4650 1750 4750 1850
+	4450 1750 4550 1850
 Entry Wire Line
 	5550 1750 5650 1850
 Entry Wire Line
@@ -238,14 +238,14 @@ F 3 "http://www.apem.com/int/index.php?controller=attachment&id_attachment=1371"
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:LED LED1
+L Device:LED LED2
 U 1 1 61B48610
-P 4250 2350
-F 0 "LED1" V 4197 2430 50  0000 L CNN
-F 1 "red" V 4288 2430 50  0000 L CNN
-F 2 "" H 4250 2350 50  0001 C CNN
-F 3 "~" H 4250 2350 50  0001 C CNN
-	1    4250 2350
+P 4950 2350
+F 0 "LED2" V 4897 2430 50  0000 L CNN
+F 1 "red" V 4988 2430 50  0000 L CNN
+F 2 "" H 4950 2350 50  0001 C CNN
+F 3 "~" H 4950 2350 50  0001 C CNN
+	1    4950 2350
 	0    1    1    0   
 $EndComp
 $Comp
@@ -272,11 +272,11 @@ Wire Wire Line
 Wire Wire Line
 	7250 2200 7250 2600
 Wire Wire Line
-	4750 1850 4750 1900
+	4550 1850 4550 1900
 Wire Wire Line
 	4250 1900 4250 1850
 Wire Wire Line
-	4750 3950 4750 2500
+	4550 3950 4550 2500
 Wire Wire Line
 	3300 3800 3850 3800
 Wire Wire Line
@@ -352,7 +352,7 @@ Wire Wire Line
 Wire Wire Line
 	5450 3600 7500 3600
 $Comp
-L Arduino:Arduino_Micro A000053
+L final_project-rescue:Arduino_Micro-Arduino A000053
 U 1 1 61B0E640
 P 5350 4550
 F 0 "A000053" V 5297 5480 60  0000 L CNN
@@ -372,8 +372,6 @@ NoConn ~ 7950 3300
 NoConn ~ 6550 2950
 NoConn ~ 6550 3050
 NoConn ~ 7100 3050
-Wire Wire Line
-	4250 2500 4250 2800
 Connection ~ 4250 2800
 Wire Wire Line
 	4250 2800 4650 2800
@@ -384,6 +382,30 @@ Wire Wire Line
 Entry Wire Line
 	3750 1750 3850 1850
 NoConn ~ 3850 2800
+Wire Wire Line
+	4250 2200 4250 2800
+NoConn ~ 4550 2800
+$Comp
+L Device:R R3
+U 1 1 61B37DE3
+P 4950 2050
+F 0 "R3" H 5020 2096 50  0000 L CNN
+F 1 "1k" H 5020 2005 50  0000 L CNN
+F 2 "" V 4880 2050 50  0001 C CNN
+F 3 "~" H 4950 2050 50  0001 C CNN
+	1    4950 2050
+	1    0    0    -1  
+$EndComp
+Entry Wire Line
+	4850 1750 4950 1850
+Wire Wire Line
+	4950 1850 4950 1900
+Wire Wire Line
+	4850 3950 4850 2800
+Wire Wire Line
+	4850 2800 4950 2800
+Wire Wire Line
+	4950 2800 4950 2500
 Wire Bus Line
 	6450 3300 8950 3300
 Wire Bus Line
