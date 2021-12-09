@@ -42,17 +42,17 @@ int minSetTemp = -10;
 // Thermoelectric cooler variables and Pins
 const int controlPinTEC = 11;  // use PWM pin for future development
 const int controlLedPin = 9;  // Where the control (red) LED is connected to
-float kp = 0.5;  // Kp constant for prop control
+float kp = 2;  // Kp constant for prop control
 
 // Button pins to set temperature
-const int setModeButton = 4;
+const int setModeButton = 6;
 const int setPlusButton = 5;
-const int setMinusButton = 6;
+const int setMinusButton = 4;
 
 int buttonInteractionTime = 250;  // human interaction time in ms with buttons
 
 // LED Pins and temperature happiness range
-const int ledOk = 9;
+const int ledOk = 12;
 float happiness_delta = 0.5;  // +- this delta, our unit is running great!
 
 void setup() {
@@ -66,8 +66,6 @@ void setup() {
   pinMode(controlPinTEC, OUTPUT);
   pinMode(controlLedPin, OUTPUT);
   pinMode(ledOk, OUTPUT);
-
-  Serial.begin(9600);
 }
 
 void getTemperature() {
@@ -155,12 +153,11 @@ void controlTEC() {
     // now map the response
     int controlLevel = map(int(round(propLevel)), 0, 100, 0, 255);  // integer mapping
     analogWrite(controlPinTEC, controlLevel);
-    digitalWrite(controlLedPin, HIGH);
-    Serial.println(controlLevel);
+    analogWrite(controlLedPin, controlLevel);
   }
   else {  // it's just right or too cold
     analogWrite(controlPinTEC, 0);
-    digitalWrite(controlLedPin, LOW);
+    analogWrite(controlLedPin, 0);
   }
 }
 
