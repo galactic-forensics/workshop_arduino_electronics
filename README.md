@@ -47,7 +47,7 @@ and copyrights can be found
 
 All original files in this repository
 are published under the 
-[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 license,
 see [LICENSE.md](LICENSE.md) for details.
 Image licenses for non-original files
